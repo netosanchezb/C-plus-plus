@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+
+int euclides(int a, int b){
+	
+	int r;			
+	if (a == 0)
+		return b;
+			else
+				if (b == 0)
+					return 	a;
+						else 
+							r = a % b;				
+	return euclides(b,r);
+}	
+
+int main(){
+
+int a, b, GCD;
+
+cout << "Provide the first number: " << endl;
+cin >> a;
+cout << "Provide the second number: "<< endl;
+cin >> b;
+
+GCD = euclides(a,b);
+cout << "Your Greatest Common Divisor is: " << GCD;
+
+}
