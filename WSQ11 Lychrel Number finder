@@ -1,0 +1,75 @@
+#include <iostream>
+#include "BigIntegerLibrary.hh"
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+
+	BigInteger Num_reverse (BigInteger i){
+		
+		string neto = bigIntegerToString(i);    
+		neto = string(neto.rbegin(),neto.rend());   
+		i = stringToBigInteger(neto);      
+		
+		return i;
+	}
+	
+	bool lych_finder (BigInteger i){
+		
+		for(int n=0;n<30;n++){
+		BigInteger flip= Num_reverse(i);
+		if(flip == i)       
+		return true;
+		i += flip;
+  }
+		return false;   
+	
+	}
+	
+int main(){
+	
+	BigInteger reverse, remainder, num, total_num = 0, Natpal_count = 0, pal_count = 0, lowB, highB, lycherls, analized_num;
+	string x0, x1;
+	
+	do {
+	cout << "Provide the lower bound of the sequence: " << endl;
+	cin >> x0;
+	lowB = stringToBigInteger(x0);
+	
+	cout << "Provide the upper bound of the sequence: " << endl;
+	cin >> x1;
+	highB = stringToBigInteger(x1);
+	
+	
+	if (highB < lowB)
+		cout << "The lower bound of the sequence must be less than the higher bound" << endl;
+	
+	} while (lowB > highB);
+	
+	
+	for (analized_num = lowB; analized_num <= highB; analized_num++){
+		
+		reverse = Num_reverse (analized_num);
+		total_num += 1;
+		
+		if (reverse == analized_num)
+			Natpal_count ++;
+			else {
+				bool n = lych_finder(analized_num);
+			if(n == true)                     
+				pal_count++;
+					  else{
+						cout<<"Lychrel number found: "<< analized_num << endl;
+						lycherls ++; }
+									 }					
+									 }		 			
+	
+		
+		cout << "The results for the range between " << x0 << " and " << x1 << " are: " << endl;
+		cout << endl;
+		cout << total_num << " numbers were analysed" << endl;
+		cout << "Natural Palindrome numbers total: " << Natpal_count << endl;
+		cout << "Non Lychrel numbers found: " << pal_count << endl;
+		cout << "Number of Lychrels found: " << lycherls << endl;
+		 }
